@@ -30,8 +30,8 @@ public class HeapOomController {
 
     @PostMapping("/heap")
     public ResponseEntity<String> leakHeap(
-            @RequestParam(defaultValue = "50") int entries,
-            @RequestParam(defaultValue = "64") int entryKb) {
+            @RequestParam(name = "entries", defaultValue = "50") int entries,
+            @RequestParam(name = "entryKb", defaultValue = "64") int entryKb) {
         int safeEntries = Math.min(entries, MAX_ENTRIES);
         int safeEntryKb = Math.min(entryKb, MAX_ENTRY_KB);
 

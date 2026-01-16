@@ -36,7 +36,7 @@ public class DownstreamSlowController {
 
     @GetMapping("/slow")
     public ResponseEntity<String> callSlowDependency(
-            @RequestParam(defaultValue = "2000") long delayMs) {
+            @RequestParam(name = "delayMs", defaultValue = "2000") long delayMs) {
         long safeDelayMs = Math.min(delayMs, MAX_DELAY.toMillis());
         String url = "http://localhost:" + serverPort + "/internal/downstream/slow?delayMs=" + safeDelayMs;
 

@@ -38,8 +38,8 @@ public class DbPoolExhaustionController {
 
     @PostMapping("/slow")
     public ResponseEntity<String> slowQueries(
-            @RequestParam(defaultValue = "5") int concurrent,
-            @RequestParam(defaultValue = "2000") long delayMs) {
+            @RequestParam(name = "concurrent", defaultValue = "5") int concurrent,
+            @RequestParam(name = "delayMs", defaultValue = "2000") long delayMs) {
         int safeConcurrent = Math.min(concurrent, MAX_CONCURRENT);
         long safeDelayMs = Math.min(delayMs, MAX_DELAY.toMillis());
 

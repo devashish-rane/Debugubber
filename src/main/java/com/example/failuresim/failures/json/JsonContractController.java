@@ -22,7 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class JsonContractController {
 
     @GetMapping("/break")
-    public ResponseEntity<Object> contractBreak(@RequestParam(defaultValue = "new") String version) {
+    public ResponseEntity<Object> contractBreak(
+            @RequestParam(name = "version", defaultValue = "new") String version) {
         if ("old".equalsIgnoreCase(version)) {
             return ResponseEntity.ok(new OldUserResponse("Ada Lovelace"));
         }

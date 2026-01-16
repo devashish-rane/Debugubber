@@ -32,8 +32,9 @@ public class IoLeakController {
 
     @PostMapping("/leak")
     public ResponseEntity<String> leakFileDescriptors(
-            @RequestParam(defaultValue = "5") int count,
-            @RequestParam(defaultValue = "false") boolean closeAll) throws IOException {
+            @RequestParam(name = "count", defaultValue = "5") int count,
+            @RequestParam(name = "closeAll", defaultValue = "false") boolean closeAll)
+            throws IOException {
         if (closeAll) {
             for (InputStream stream : OPEN_STREAMS) {
                 stream.close();

@@ -25,7 +25,8 @@ public class LoggingSpamController {
     private static final int MAX_LINES = 200;
 
     @PostMapping("/spam")
-    public ResponseEntity<String> spamLogs(@RequestParam(defaultValue = "50") int lines) {
+    public ResponseEntity<String> spamLogs(
+            @RequestParam(name = "lines", defaultValue = "50") int lines) {
         int safeLines = Math.min(lines, MAX_LINES);
         for (int i = 1; i <= safeLines; i++) {
             log.info("Logging overload simulation line {}/{}", i, safeLines);

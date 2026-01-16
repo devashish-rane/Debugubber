@@ -25,9 +25,9 @@ public class StaleCacheController {
 
     @GetMapping("/stale")
     public ResponseEntity<String> staleCache(
-            @RequestParam String userId,
-            @RequestParam(defaultValue = "us-east") String region,
-            @RequestParam(defaultValue = "blue") String segment) {
+            @RequestParam(name = "userId") String userId,
+            @RequestParam(name = "region", defaultValue = "us-east") String region,
+            @RequestParam(name = "segment", defaultValue = "blue") String segment) {
         // BUG: cache key ignores region and segment, causing cross-region contamination.
         String cacheKey = userId;
         String value = cache.computeIfAbsent(cacheKey,

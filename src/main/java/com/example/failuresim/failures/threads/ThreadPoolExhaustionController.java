@@ -36,8 +36,9 @@ public class ThreadPoolExhaustionController {
 
     @PostMapping("/block")
     public ResponseEntity<String> blockThreads(
-            @RequestParam(defaultValue = "5") int tasks,
-            @RequestParam(defaultValue = "2000") long blockMs) throws Exception {
+            @RequestParam(name = "tasks", defaultValue = "5") int tasks,
+            @RequestParam(name = "blockMs", defaultValue = "2000") long blockMs)
+            throws Exception {
         int safeTasks = Math.min(tasks, MAX_TASKS);
         long safeBlockMs = Math.min(blockMs, MAX_BLOCK_TIME.toMillis());
 

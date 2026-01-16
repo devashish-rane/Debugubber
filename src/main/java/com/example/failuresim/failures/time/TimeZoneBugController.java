@@ -27,7 +27,8 @@ public class TimeZoneBugController {
 
     @GetMapping("/zone")
     public ResponseEntity<String> timeZoneBug(
-            @RequestParam(defaultValue = "2024-03-10T01:30:00") String localDateTime) {
+            @RequestParam(name = "localDateTime", defaultValue = "2024-03-10T01:30:00")
+                    String localDateTime) {
         LocalDateTime input = LocalDateTime.parse(localDateTime);
 
         // Bug: assumes local time is UTC when it's actually system default.

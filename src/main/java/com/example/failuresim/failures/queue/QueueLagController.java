@@ -30,7 +30,8 @@ public class QueueLagController {
     }
 
     @PostMapping("/lag")
-    public ResponseEntity<String> queueLag(@RequestParam(defaultValue = "50") int items) {
+    public ResponseEntity<String> queueLag(
+            @RequestParam(name = "items", defaultValue = "50") int items) {
         int safeItems = Math.min(items, MAX_ITEMS);
         int accepted = 0;
 

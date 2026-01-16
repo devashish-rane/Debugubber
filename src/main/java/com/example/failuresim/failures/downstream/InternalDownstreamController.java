@@ -19,7 +19,8 @@ public class InternalDownstreamController {
     private static final Duration MAX_DELAY = Duration.ofSeconds(10);
 
     @GetMapping("/slow")
-    public ResponseEntity<String> slowEndpoint(@RequestParam(defaultValue = "1000") long delayMs)
+    public ResponseEntity<String> slowEndpoint(
+            @RequestParam(name = "delayMs", defaultValue = "1000") long delayMs)
             throws InterruptedException {
         long safeDelayMs = Math.min(delayMs, MAX_DELAY.toMillis());
         Thread.sleep(safeDelayMs);

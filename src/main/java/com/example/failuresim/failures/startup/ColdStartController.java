@@ -25,7 +25,8 @@ public class ColdStartController {
     private final AtomicBoolean warmed = new AtomicBoolean(false);
 
     @GetMapping("/cold")
-    public ResponseEntity<String> coldStart(@RequestParam(defaultValue = "2000") long delayMs)
+    public ResponseEntity<String> coldStart(
+            @RequestParam(name = "delayMs", defaultValue = "2000") long delayMs)
             throws InterruptedException {
         if (warmed.compareAndSet(false, true)) {
             long safeDelayMs = Math.min(delayMs, MAX_DELAY.toMillis());

@@ -39,8 +39,8 @@ public class RetryStormController {
 
     @PostMapping("/storm")
     public ResponseEntity<String> retryStorm(
-            @RequestParam(defaultValue = "3") int retries,
-            @RequestParam(defaultValue = "250") long delayMs) {
+            @RequestParam(name = "retries", defaultValue = "3") int retries,
+            @RequestParam(name = "delayMs", defaultValue = "250") long delayMs) {
         int safeRetries = Math.min(retries, MAX_RETRIES);
         long safeDelayMs = Math.min(delayMs, MAX_DELAY.toMillis());
         String url = "http://localhost:" + serverPort + "/internal/downstream/fail";

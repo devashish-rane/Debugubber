@@ -27,7 +27,7 @@ public class IdempotencyFailureController {
 
     @PostMapping("/duplicate")
     public ResponseEntity<String> duplicateProcessing(
-            @RequestParam(defaultValue = "") String requestId) {
+            @RequestParam(name = "requestId", defaultValue = "") String requestId) {
         int current = totalProcessed.incrementAndGet();
 
         if (!requestId.isBlank()) {

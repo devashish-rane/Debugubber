@@ -29,9 +29,10 @@ public class GcPressureController {
 
     @PostMapping("/pressure")
     public ResponseEntity<String> gcPressure(
-            @RequestParam(defaultValue = "20") int batches,
-            @RequestParam(defaultValue = "256") int allocationKb,
-            @RequestParam(defaultValue = "50") long pauseMs) throws InterruptedException {
+            @RequestParam(name = "batches", defaultValue = "20") int batches,
+            @RequestParam(name = "allocationKb", defaultValue = "256") int allocationKb,
+            @RequestParam(name = "pauseMs", defaultValue = "50") long pauseMs)
+            throws InterruptedException {
         int safeBatches = Math.min(batches, MAX_BATCHES);
         int safeAllocationKb = Math.min(allocationKb, MAX_ALLOCATION_KB);
         long safePauseMs = Math.min(pauseMs, MAX_PAUSE.toMillis());
