@@ -48,7 +48,7 @@ public class DbPoolExhaustionController {
 
         for (int i = 0; i < safeConcurrent; i++) {
             futures.add(CompletableFuture.runAsync(() ->
-                    jdbcTemplate.execute("CALL SLEEP(" + safeDelayMs + ")"), executor));
+                    jdbcTemplate.execute("CALL DB_SLEEP(" + safeDelayMs + ")"), executor));
         }
 
         futures.forEach(CompletableFuture::join);

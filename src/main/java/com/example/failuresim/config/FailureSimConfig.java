@@ -6,9 +6,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -42,6 +44,12 @@ public class FailureSimConfig {
     @Bean
     public BlockingQueue<String> workQueue() {
         return new LinkedBlockingQueue<>(1000);
+    }
+
+    @Bean
+    public ApplicationRunner h2SleepAliasInitializer(JdbcTemplate jdbcTemplate) {
+        return args -> jdbcTemplate.execute(
+                "CREATE ALIAS IF NOT EXISTS DB_SLEEP FOR \"java.lang.Thread.sleep\"");
     }
 
     @Bean
