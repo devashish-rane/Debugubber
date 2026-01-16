@@ -38,6 +38,14 @@ public class DownstreamSlowController {
     public ResponseEntity<String> callSlowDependency(
             @RequestParam(name = "delayMs", defaultValue = "2000") long delayMs) {
         long safeDelayMs = Math.min(delayMs, MAX_DELAY.toMillis());
+        try{
+            Thread.sleep(2000);
+        }
+        catch(Exception ex){
+            System.out.println("dede");
+        }
+
+        
         String url = "http://localhost:" + serverPort + "/internal/downstream/slow?delayMs=" + safeDelayMs;
 
         // No timeout configured: call will block for the full delay.
